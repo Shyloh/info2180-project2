@@ -1,32 +1,106 @@
+"use strict";
 window.onload = function(){
-    var step= document.querySelectorAll("#puzzlearea div");
-    var piece= document.querySelectorAll(".puzzlepiece");
-    var x =0;
-    var y =0;
-    var TOP = "300px";
-    var LEFT = "300px";
-    var bTop, bleft;
-    var count = 0;
+var step = document.querySelectorAll("#puzzlearea div");
+var x=0;
+var y= 0;
+var BTOP= "300px";
+var BLEFT= "300px";
+var BLOCKTOP, BLOCKLEFT;
 
-    // position of tile
-    for (let index =0; index< step.length; index ++){
-        step[index].setAttribute("class", "puzzlepiece");
-        step[index].style.left = x + "px";
-        step[index].style.top = y + "px";
-        step[index].style.backgroundPosition = "-" + x + "px"+ "-"+ y + "px";
-        if (x<300){
-            x+=100;
-        }else{
+
+
+    for(var i=0; i < step.length; i++){
+        step[i].setAttribute("class", "puzzlepiece") ;
+        step[i].style.left= x + 'px';
+        step[i].style.top= y + 'px';
+        step[i].style.backgroundPosition= "-" + x + "px " + "-" + y + "px";
+        if (x < 300){
+          x+=100;
+        }
+        else{
             x=0;
             y+=100;
         }
     }
-    let dive = pArea.getElementsByTagName("div");
-    for (let index =0; index < dive.length; index ++ ){
-        dive[index].style.backgroundImage ="url(background.jpg)";
+
+    var shufflebutton= document.getElementById('shufflebutton');
+    shufflebutton.addEventListener("click", shuffle);
+     for(var i=0; i < step.length; i++){
+          (function(index) {
+            step[index].addEventListener("mouseover", function(){
+            validMove(this);
+            });
+            step[index].addEventListener("click", function(){
+            if (validMove(this)){
+                     move(step[index]);
+            }
+            });
+            step[index].addEventListener("mouseout", function(){
+                       this.setAttribute("class", "puzzlepiece");
+            });
+          })(i);
+
+     }
+
+     function shuffle(){
+         var piece;
+         for (var i=0; i<100; i++){
+                 piece=  Math.floor(Math.random() * 10);
+                 move(step[piece]);
+         }
+     }
+
+
+    function move(puzzlepiece){
+            BLOCKTOP=puzzlepiece.offsetTop;
+            BLOCKLEFT=puzzlepiece.offsetLeft;
+            puzzlepiece.setAttribute("id", "selected");
+            $('#selected').animate({
+                backgroundImage: "url(background.jpg)",
+                border: "2px solid black",
+                height: "96px",
+                lineHeight: "96px",
+                position: "absolute",
+                textAlign: "center",
+                verticalAlign: "middle",
+                width: "96px",
+                left: BLEFT,
+                top: BTOP
+             });
+              puzzlepiece.style.top = BTOP;
+              puzzlepiece.style.left = BLEFT;
+              BTOP= BLOCKTOP + "px";
+              BLEFT=BLOCKLEFT + "px";
+              puzzlepiece.removeAttribute("id");
+    }
+
+
+    function validMove(puzzlepiece){
+                BLOCKTOP=puzzlepiece.offsetTop;
+                BLOCKLEFT= puzzlepiece.offsetLeft;
+                var top= BLOCKTOP + "px";
+                var left= BLOCKLEFT + "px";
+
+                var testleft= Math.abs(parseInt(left) - parseInt(BLEFT));
+                if (top == BTOP && testleft==100){
+                        puzzlepiece.setAttribute("class", "puzzlepiece movablepiece");
+                        return true;
+
+                       }
+
+                var testright= Math.abs(parseInt(top) - parseInt(BTOP));
+                if (left == BLEFT && testright==100){
+                        puzzlepiece.setAttribute("class", "puzzlepiece movablepiece");
+                        return true;
+
+                       }
 
     }
-   
-
-  
+    
+    
+    
 }
+
+
+
+    

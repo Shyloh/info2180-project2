@@ -1,4 +1,5 @@
 "use strict";
+//Animate
 window.onload = function(){
 var step = document.querySelectorAll("#puzzlearea div");
 var x=0;
@@ -57,15 +58,17 @@ var BLOCKTOP, BLOCKLEFT;
             puzzlepiece.setAttribute("id", "selected");
             $('#selected').animate({
                 backgroundImage: "url(background.jpg)",
-                border: "2px solid black",
+                border: "2px solid yellow",
                 height: "96px",
                 lineHeight: "96px",
                 position: "absolute",
                 textAlign: "center",
                 verticalAlign: "middle",
                 width: "96px",
+                fontfamily: "Sans, Arial",
                 left: BLEFT,
                 top: BTOP
+                
              });
               puzzlepiece.style.top = BTOP;
               puzzlepiece.style.left = BLEFT;
@@ -78,17 +81,17 @@ var BLOCKTOP, BLOCKLEFT;
     function validMove(puzzlepiece){
                 BLOCKTOP=puzzlepiece.offsetTop;
                 BLOCKLEFT= puzzlepiece.offsetLeft;
-                var top= BLOCKTOP + "px";
+                var up= BLOCKTOP + "px";
                 var left= BLOCKLEFT + "px";
 
                 var testleft= Math.abs(parseInt(left) - parseInt(BLEFT));
-                if (top == BTOP && testleft==100){
+                if (up == BTOP && testleft==100){
                         puzzlepiece.setAttribute("class", "puzzlepiece movablepiece");
                         return true;
 
                        }
 
-                var testright= Math.abs(parseInt(top) - parseInt(BTOP));
+                var testright= Math.abs(parseInt(up) - parseInt(BTOP));
                 if (left == BLEFT && testright==100){
                         puzzlepiece.setAttribute("class", "puzzlepiece movablepiece");
                         return true;

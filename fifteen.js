@@ -10,7 +10,6 @@ window.onload = function(){
 
     // position of tile
     for (let index =0; index< step.length; index ++){
-        step[index].style.backgroundImage= "url(background.jpg)";
         step[index].setAttribute("class", "puzzlepiece");
         step[index].style.left = x + "px";
         step[index].style.top = y + "px";
@@ -22,7 +21,11 @@ window.onload = function(){
             y+=100;
         }
     }
-    
+    let dive = pArea.getElementsByTagName("div");
+    for (let index =0; index < dive.length; index ++ ){
+        dive[index].style.backgroundImage ="url(background.jpg)";
+
+    }
    
 
   

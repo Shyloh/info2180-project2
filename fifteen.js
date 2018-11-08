@@ -55,6 +55,7 @@ let BLOCKTOP, BLOCKLEFT;
                 height: "96px",
                 lineHeight: "96px",
                 width: "96px",
+                margin: "0px",
                 left: BLEFT,
                 top: BTOP
                 

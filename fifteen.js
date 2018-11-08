@@ -8,8 +8,6 @@ let BTOP= "300px";
 let BLEFT= "300px";
 let BLOCKTOP, BLOCKLEFT;
 
-
-
     for(let i=0; i < step.length; i++){
         step[i].setAttribute("class", "puzzlepiece") ;
         step[i].style.left= x + 'px';
@@ -23,7 +21,6 @@ let BLOCKTOP, BLOCKLEFT;
             y+=100;
         }
     }
-
     let shufflebutton= document.getElementById('shufflebutton');
     shufflebutton.addEventListener("click", shuffle);
      for(var i=0; i < step.length; i++){
@@ -40,9 +37,7 @@ let BLOCKTOP, BLOCKLEFT;
                        this.setAttribute("class", "puzzlepiece");
             });
           })(i);
-
      }
-
      function shuffle(){
          let piece;
          for (let i=0; i<100; i++){
@@ -50,22 +45,16 @@ let BLOCKTOP, BLOCKLEFT;
                  move(step[piece]);
          }
      }
-
-
     function move(puzzlepiece){
             BLOCKTOP=puzzlepiece.offsetTop;
             BLOCKLEFT=puzzlepiece.offsetLeft;
             puzzlepiece.setAttribute("id", "selected");
             $('#selected').animate({
                 backgroundImage: "url(background.jpg)",
-                border: "2px solid yellow",
+                border: "10px solid black",
                 height: "96px",
                 lineHeight: "96px",
-                position: "absolute",
-                textAlign: "center",
-                verticalAlign: "middle",
                 width: "96px",
-                fontfamily: "Sans, Arial",
                 left: BLEFT,
                 top: BTOP
                 
@@ -76,8 +65,6 @@ let BLOCKTOP, BLOCKLEFT;
               BLEFT=BLOCKLEFT + "px";
               puzzlepiece.removeAttribute("id");
     }
-
-
     function validMove(puzzlepiece){
                 BLOCKTOP=puzzlepiece.offsetTop;
                 BLOCKLEFT= puzzlepiece.offsetLeft;
@@ -85,17 +72,14 @@ let BLOCKTOP, BLOCKLEFT;
                 let left= BLOCKLEFT + "px";
 
                 let testleft= Math.abs(parseInt(left) - parseInt(BLEFT));
-                if (up == BTOP && testleft==100){
+                if (up === BTOP && testleft===100){
                         puzzlepiece.setAttribute("class", "puzzlepiece movablepiece");
                         return true;
-
                        }
-
                 let testright= Math.abs(parseInt(up) - parseInt(BTOP));
-                if (left == BLEFT && testright==100){
+                if (left === BLEFT && testright===100){
                         puzzlepiece.setAttribute("class", "puzzlepiece movablepiece");
                         return true;
-
                        }
 
     }

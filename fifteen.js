@@ -1,16 +1,16 @@
 "use strict";
 //Animate
 window.onload = function(){
-var step = document.querySelectorAll("#puzzlearea div");
-var x=0;
-var y= 0;
-var BTOP= "300px";
-var BLEFT= "300px";
-var BLOCKTOP, BLOCKLEFT;
+let step = document.querySelectorAll("#puzzlearea div");
+let x=0;
+let y= 0;
+let BTOP= "300px";
+let BLEFT= "300px";
+let BLOCKTOP, BLOCKLEFT;
 
 
 
-    for(var i=0; i < step.length; i++){
+    for(let i=0; i < step.length; i++){
         step[i].setAttribute("class", "puzzlepiece") ;
         step[i].style.left= x + 'px';
         step[i].style.top= y + 'px';
@@ -24,7 +24,7 @@ var BLOCKTOP, BLOCKLEFT;
         }
     }
 
-    var shufflebutton= document.getElementById('shufflebutton');
+    let shufflebutton= document.getElementById('shufflebutton');
     shufflebutton.addEventListener("click", shuffle);
      for(var i=0; i < step.length; i++){
           (function(index) {
@@ -44,8 +44,8 @@ var BLOCKTOP, BLOCKLEFT;
      }
 
      function shuffle(){
-         var piece;
-         for (var i=0; i<100; i++){
+         let piece;
+         for (let i=0; i<100; i++){
                  piece=  Math.floor(Math.random() * 10);
                  move(step[piece]);
          }
@@ -81,17 +81,17 @@ var BLOCKTOP, BLOCKLEFT;
     function validMove(puzzlepiece){
                 BLOCKTOP=puzzlepiece.offsetTop;
                 BLOCKLEFT= puzzlepiece.offsetLeft;
-                var up= BLOCKTOP + "px";
-                var left= BLOCKLEFT + "px";
+                let up= BLOCKTOP + "px";
+                let left= BLOCKLEFT + "px";
 
-                var testleft= Math.abs(parseInt(left) - parseInt(BLEFT));
+                let testleft= Math.abs(parseInt(left) - parseInt(BLEFT));
                 if (up == BTOP && testleft==100){
                         puzzlepiece.setAttribute("class", "puzzlepiece movablepiece");
                         return true;
 
                        }
 
-                var testright= Math.abs(parseInt(up) - parseInt(BTOP));
+                let testright= Math.abs(parseInt(up) - parseInt(BTOP));
                 if (left == BLEFT && testright==100){
                         puzzlepiece.setAttribute("class", "puzzlepiece movablepiece");
                         return true;
